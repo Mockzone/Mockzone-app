@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0F2A4A">
+<meta name="color-scheme" content="light">
+<title>Mock Test 2 · Percentage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0F2A4A; --navy-deep:#0A1E38; --teal:#0EA5A0; --teal-light:#E6F7F6;
+  --amber:#F0A93A; --red:#E1523F; --green:#1FA971; --purple:#7A4FD6;
+  --bg:#F4F6F9; --card:#FFFFFF; --ink:#122036; --ink-soft:#5A6B82; --line:#E3E8EF;
+  --radius:14px; --radius-sm:8px;
+  --shadow:0 2px 10px rgba(15,42,74,0.07); --shadow-lg:0 10px 30px rgba(15,42,74,0.14);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans Devanagari','Poppins',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;}
+h1,h2,h3,h4{font-family:'Poppins','Noto Sans Devanagari',sans-serif;margin:0;color:var(--navy);}
+p{line-height:1.7;margin:0 0 10px 0;}
+button{font-family:inherit;cursor:pointer;}
+.hidden{display:none !important;}
+
+.wm-layer{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.06;}
+.wm-layer span{position:absolute;white-space:nowrap;font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;color:#0F2A4A;transform:rotate(-28deg);letter-spacing:1px;}
+
+#app{max-width:520px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:24px;}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);}
+.topbar .tb-txt{flex:1;min-width:0;}
+.topbar .title{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .sub{font-size:11px;opacity:0.75;}
+.q-timer{background:rgba(255,255,255,0.14);color:#fff;padding:7px 13px;border-radius:20px;font-weight:700;font-size:14px;font-family:'Poppins',sans-serif;letter-spacing:0.5px;flex-shrink:0;}
+.q-timer.low{background:var(--red);animation:pulse 1s infinite;}
+@keyframes pulse{0%{opacity:1;}50%{opacity:0.55;}100%{opacity:1;}}
+
+.view{padding:16px;}
+
+/* Intro */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#133a63 55%,var(--teal) 160%);color:#fff;border-radius:var(--radius);padding:24px 20px;position:relative;overflow:hidden;}
+.hero .badge{display:inline-block;background:rgba(255,255,255,0.16);border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:600;margin-bottom:10px;}
+.hero h1{color:#fff;font-size:24px;font-weight:800;}
+.hero .tag{color:#CFE8FF;font-size:13px;margin-top:6px;}
+.intro-stats{display:flex;gap:10px;margin:14px 0;}
+.intro-stat{background:var(--teal-light);border-radius:10px;padding:12px 6px;flex:1;text-align:center;}
+.intro-stat b{display:block;font-size:19px;color:var(--navy);font-family:'Poppins',sans-serif;}
+.intro-stat span{font-size:11px;color:var(--ink-soft);}
+.card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-top:14px;}
+.card h3{font-size:14.5px;margin-bottom:8px;}
+.rules{margin:0;padding-left:18px;font-size:12.8px;color:#2B3B52;}
+.rules li{margin-bottom:6px;line-height:1.6;}
+.sec-list .sl{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px;}
+.sec-list .sl:last-child{border:none;}
+.sec-list .sl b{color:var(--teal);}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:11.5px;color:var(--ink-soft);}
+.legend i{display:inline-block;width:16px;height:16px;border-radius:5px;vertical-align:-4px;margin-right:5px;}
+.start-btn{width:100%;padding:14px;border:none;border-radius:12px;background:var(--teal);color:#fff;font-weight:800;font-size:15px;margin-top:16px;}
+
+/* Section tabs */
+.sec-tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:57px;z-index:40;-webkit-overflow-scrolling:touch;}
+.sec-tab{flex:1;min-width:150px;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;text-align:left;color:var(--ink-soft);}
+.sec-tab b{display:block;font-size:12.5px;color:var(--navy);}
+.sec-tab span{font-size:11px;}
+.sec-tab.active{border-color:var(--teal);background:var(--teal-light);}
+.sec-tab.active b{color:var(--teal);}
+
+/* Question */
+.quiz-body{padding:14px 16px 0;}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;}
+.q-progress{font-size:12.5px;font-weight:700;color:var(--navy);}
+.q-marks{font-size:11px;font-weight:600;color:var(--ink-soft);}
+.q-marks .p{color:var(--green);} .q-marks .n{color:var(--red);}
+.flag-chip{border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:20px;padding:5px 11px;font-size:11.5px;font-weight:700;}
+.flag-chip.on{background:var(--purple);border-color:var(--purple);color:#fff;}
+.q-card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.65;margin-bottom:14px;}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1.5px solid var(--line);border-radius:10px;margin-bottom:10px;font-size:13.5px;line-height:1.5;background:#fff;cursor:pointer;}
+.opt .opt-letter{width:24px;height:24px;border-radius:50%;background:var(--bg);color:var(--ink-soft);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.opt.selected{border-color:var(--teal);background:var(--teal-light);}
+.opt.selected .opt-letter{background:var(--teal);color:#fff;}
+.opt.correct{border-color:var(--green);background:#EAFBF3;}
+.opt.correct .opt-letter{background:var(--green);color:#fff;}
+.opt.wrong{border-color:var(--red);background:#FDECEA;}
+.opt.wrong .opt-letter{background:var(--red);color:#fff;}
+.hint{font-size:11.5px;color:#8A5A00;background:#FFF6E6;border-radius:8px;padding:7px 10px;margin-top:2px;}
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+.act-grid.two{grid-template-columns:1fr 1fr;}
+.abtn{border:none;border-radius:10px;padding:12px 6px;font-weight:700;font-size:12.5px;}
+.a-prev{background:#fff;color:var(--navy);border:1px solid var(--line) !important;}
+.a-skip{background:#fff;color:var(--ink-soft);border:1px solid var(--line) !important;}
+.a-clear{background:#FDECEA;color:var(--red);}
+.a-mark{background:#EFE8FB;color:var(--purple);}
+.a-save{background:var(--navy);color:#fff;}
+
+/* Palette */
+.palette-wrap{margin-top:16px;background:#fff;border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);}
+.palette-wrap h4{font-size:13.5px;margin-bottom:10px;}
+.psec{font-size:11.5px;font-weight:700;color:var(--ink-soft);margin:10px 0 6px;}
+.pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.pbtn{position:relative;height:40px;border-radius:9px;border:1.5px solid var(--line);background:#EEF1F5;color:var(--ink-soft);font-weight:700;font-size:13px;font-family:'Poppins',sans-serif;}
+.pbtn.notans{background:#FDECEA;border-color:var(--red);color:var(--red);}
+.pbtn.ans{background:var(--green);border-color:var(--green);color:#fff;}
+.pbtn.mark{background:var(--purple);border-color:var(--purple);color:#fff;border-radius:50%;}
+.pbtn.markans{background:var(--purple);border-color:var(--purple);color:#fff;border-radius:50%;}
+.pbtn.markans::after{content:"";position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;background:var(--green);border:2px solid #fff;}
+.pbtn.cur{outline:3px solid var(--amber);outline-offset:1px;}
+.submit-btn{width:100%;margin-top:14px;padding:14px;border:none;border-radius:12px;background:var(--red);color:#fff;font-weight:800;font-size:14.5px;}
+
+/* Modal + toast */
+.modal-bg{position:fixed;inset:0;background:rgba(10,30,56,0.55);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
+.modal{background:#fff;width:100%;max-width:520px;border-radius:20px 20px 0 0;padding:20px 18px 24px;}
+.modal h3{font-size:17px;margin-bottom:12px;}
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.sum-item{background:var(--bg);border-radius:10px;padding:10px;text-align:center;}
+.sum-item b{display:block;font-size:19px;font-family:'Poppins',sans-serif;color:var(--navy);}
+.sum-item span{font-size:11px;color:var(--ink-soft);}
+.m-row{display:flex;gap:10px;}
+.m-row button{flex:1;padding:13px;border-radius:11px;border:none;font-weight:700;font-size:13.5px;}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:10px;font-size:12.5px;z-index:300;box-shadow:var(--shadow-lg);max-width:88%;text-align:center;}
+
+/* Result */
+.score-hero{background:linear-gradient(135deg,var(--navy) 0%,#133a63 60%,var(--teal) 170%);color:#fff;border-radius:var(--radius);padding:24px 18px;text-align:center;}
+.score-hero .lbl{font-size:12.5px;color:#CFE8FF;}
+.score-hero .big{font-family:'Poppins',sans-serif;font-size:44px;font-weight:800;line-height:1.1;margin:6px 0;}
+.score-hero .big small{font-size:18px;opacity:0.8;font-weight:600;}
+.score-hero .msg{font-size:13px;color:#EAF2FF;}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+.stat{background:#fff;border-radius:12px;padding:12px 6px;text-align:center;box-shadow:var(--shadow);}
+.stat b{display:block;font-size:19px;font-family:'Poppins',sans-serif;}
+.stat span{font-size:11px;color:var(--ink-soft);}
+.stat.g b{color:var(--green);} .stat.r b{color:var(--red);} .stat.t b{color:var(--teal);} .stat.n b{color:var(--navy);} .stat.a b{color:var(--amber);}
+.mini-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.mini-table th,.mini-table td{border:1px solid var(--line);padding:8px 6px;text-align:center;}
+.mini-table th{background:var(--navy);color:#fff;font-weight:600;}
+.mini-table td:first-child{text-align:left;}
+.res-btns{display:flex;gap:10px;margin-top:16px;}
+.res-btns button{flex:1;padding:13px;border-radius:11px;border:none;font-weight:700;font-size:13.5px;}
+.btn-navy{background:var(--navy);color:#fff;} .btn-teal{background:var(--teal-light);color:var(--teal);}
+.filters{display:flex;gap:8px;overflow-x:auto;margin:6px 0 12px;}
+.fchip{border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:20px;padding:6px 13px;font-size:12px;font-weight:700;white-space:nowrap;}
+.fchip.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.rv-card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px;}
+.rv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;font-weight:700;}
+.tagx{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;}
+.tagx.c{background:#EAFBF3;color:var(--green);} .tagx.w{background:#FDECEA;color:var(--red);} .tagx.s{background:#EEF1F5;color:var(--ink-soft);}
+.note-box{background:#FFF6E6;border-left:4px solid var(--amber);border-radius:8px;padding:10px 12px;margin-top:6px;font-size:12.8px;color:#5A4210;line-height:1.65;}
+.opt.static{cursor:default;}
+.q-text{white-space:pre-line;}
+.pyq{display:inline-block;background:#FFF6E6;color:#8A5A00;border-radius:8px;padding:2px 9px;font:700 11px Poppins,sans-serif;margin-bottom:8px;white-space:normal;}
+
+.lang-toggle{background:rgba(255,255,255,0.16);color:#fff;border:none;border-radius:20px;padding:7px 12px;font-weight:700;font-size:13px;flex-shrink:0;}
+.lang-card{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:14px;box-shadow:var(--shadow);cursor:pointer;}
+.lang-card:active{border-color:var(--teal);background:var(--teal-light);}
+.lang-ico{width:48px;height:48px;border-radius:12px;background:var(--teal-light);color:var(--teal);font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Noto Sans Devanagari','Poppins',sans-serif;}
+.lang-card b{display:block;font-size:17px;color:var(--navy);}
+.lang-card span{font-size:12px;color:var(--ink-soft);}
+.lang-card em{margin-left:auto;font-style:normal;color:var(--teal);font-size:16px;}
+
+/* RESPONSIVE */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+:root{--tb:58px;--tabs:56px}
+body{min-height:100vh;min-height:100dvh}
+#app{min-height:100vh;min-height:100dvh;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+.topbar{padding-top:max(12px,env(safe-area-inset-top,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sec-tabs{top:var(--tb)}
+.toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+#view-lang,#view-intro,#view-result,#view-review{max-width:780px;margin-left:auto;margin-right:auto}
+button{touch-action:manipulation}
+button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+@media (hover:hover){
+ .opt:not(.static):hover{border-color:var(--teal)}
+ .lang-card:hover{border-color:var(--teal);background:var(--teal-light)}
+ .abtn:hover,.pbtn:hover,.fchip:hover,.flag-chip:hover,.lang-toggle:hover{filter:brightness(.95)}
+ .start-btn:hover,.submit-btn:hover,.a-save:hover,.res-btns button:hover,.m-row button:hover{filter:brightness(1.08)}
+}
+/* tablet */
+@media (min-width:600px){
+ #app{max-width:780px}
+ .view{padding:24px}
+ .quiz-body{padding:18px 24px 0}
+ .sec-tabs{padding:10px 24px}
+ .hero{padding:30px 26px}.hero h1{font-size:28px}
+ .intro-stat b{font-size:22px}.rules{font-size:14px}.sec-list .sl{font-size:14px}.legend{font-size:12.5px}
+ .q-text{font-size:17px}
+ .opt{font-size:15px;padding:14px}.opt .opt-letter{width:28px;height:28px;font-size:13px}
+ .abtn{padding:14px 8px;font-size:14px}
+ .pgrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:10px}.pbtn{height:44px}
+ .modal-bg{align-items:center}.modal{border-radius:20px;max-width:480px;margin:16px;padding:24px 22px}
+ .score-hero .big{font-size:54px}.stat b,.sum-item b{font-size:22px}.mini-table{font-size:13.5px}
+ .rv-card{padding:20px}
+}
+/* laptop / desktop / landscape: question on the left, palette on the right */
+@media (min-width:960px),(min-width:700px) and (orientation:landscape){
+ #app{max-width:1240px}
+ .quiz-body{display:grid;grid-template-columns:minmax(0,1fr) clamp(280px,30vw,340px);grid-template-rows:auto auto auto auto 1fr;column-gap:20px;align-items:start}
+ .quiz-body>.q-meta,.quiz-body>.q-card,.quiz-body>.act-grid{grid-column:1}
+ .quiz-body>.side{grid-column:2;grid-row:1 / span 5;position:sticky;top:calc(var(--tb) + var(--tabs) + 14px);max-height:calc(100vh - var(--tb) - var(--tabs) - 28px);max-height:calc(100dvh - var(--tb) - var(--tabs) - 28px);overflow-y:auto}
+ .side .palette-wrap{margin-top:0}
+}
+@media (min-width:960px){
+ .q-text{font-size:18px}.opt{font-size:15.5px}
+ .quiz-body{padding:20px 28px 0}.sec-tabs{padding:10px 28px}
+}
+@media (min-width:1000px){
+ body{background:#E8EDF4}
+ #app{box-shadow:0 0 0 1px var(--line),0 12px 40px rgba(15,42,74,.10)}
+}
+/* short landscape screens (phones turned sideways) */
+@media (max-height:520px) and (orientation:landscape){
+ .sec-tabs{position:static}
+ .topbar{padding-top:max(7px,env(safe-area-inset-top,0px));padding-bottom:7px}
+ .quiz-body>.side{top:calc(var(--tb) + 10px)!important;max-height:calc(100vh - var(--tb) - 20px)!important}
+}
+</style>
+</head>
+<body>
+<div class="wm-layer" id="wmLayer"></div>
+<div id="app">
+  <div class="topbar">
+    <div class="tb-txt">
+      <div class="title">Mock Test 2</div>
+      <div class="sub" id="topSub"></div>
+    </div>
+    <button class="lang-toggle hidden" id="langBtn" onclick="toggleLang()">हिं | EN</button>
+    <div class="q-timer hidden" id="timer">15:00</div>
+  </div>
+
+  <!-- LANGUAGE -->
+  <div class="view" id="view-lang">
+    <div class="hero" style="text-align:center;padding:30px 20px">
+      <span class="badge">Mock Test 2</span>
+      <h1>Percentage / प्रतिशत</h1>
+      <div class="tag">Select your language<br>अपनी भाषा चुनें</div>
+    </div>
+    <div class="lang-card" onclick="setLang('hi')">
+      <div class="lang-ico">अ</div>
+      <div><b>हिन्दी</b><span>प्रश्न और निर्देश हिन्दी में</span></div>
+      <em>▶</em>
+    </div>
+    <div class="lang-card" onclick="setLang('en')">
+      <div class="lang-ico" style="background:#EAF2FF;color:#1F4E78">A</div>
+      <div><b>English</b><span>Questions &amp; instructions in English</span></div>
+      <em>▶</em>
+    </div>
+    <p style="text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:16px">You can switch the language anytime during the test.<br>टेस्ट के दौरान कभी भी भाषा बदल सकते हैं।</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="view hidden" id="view-intro"></div>
+
+  <!-- TEST -->
+  <div id="view-test" class="hidden">
+    <div class="sec-tabs" id="secTabs"></div>
+    <div class="quiz-body">
+      <div class="q-meta">
+        <div><div class="q-progress" id="qProg"></div><div class="q-marks"><span class="p">+2</span> / <span class="n">0</span></div></div>
+        <button class="flag-chip" id="flagChip" onclick="toggleMark()"></button>
+      </div>
+      <div class="q-card">
+        <div class="q-text" id="qText"></div>
+        <div id="qOpts"></div>
+        <div class="hint hidden" id="qHint"></div>
+      </div>
+      <div class="act-grid">
+        <button class="abtn a-prev" id="bPrev" onclick="prevQ()"></button>
+        <button class="abtn a-skip" id="bSkip" onclick="skipQ()"></button>
+        <button class="abtn a-clear" id="bClear" onclick="clearAns()"></button>
+      </div>
+      <div class="act-grid two">
+        <button class="abtn a-mark" id="bMark" onclick="markNext()"></button>
+        <button class="abtn a-save" id="bSave" onclick="saveNext()"></button>
+      </div>
+      <aside class="side"><div class="palette-wrap">
+        <h4 id="palTitle"></h4>
+        <div id="palette"></div>
+        <div class="legend" id="palLegend" style="margin-top:12px"></div>
+      </div>
+      <button class="submit-btn" id="bSubmit" onclick="openSubmit()"></button></aside>
+    </div>
+  </div>
+
+  <div class="view hidden" id="view-result"></div>
+  <div class="view hidden" id="view-review"></div>
+</div>
+
+<div class="modal-bg hidden" id="modal"><div class="modal" id="modalBox"></div></div>
+
+<script>
+/* ---------- Language strings ---------- */
+var UI={
+ hi:{
+  chapter:"प्रतिशत", h1:"प्रतिशत (Percentage)", tag:"Quantitative Aptitude",
+  questions:"प्रश्न", minutes:"मिनट", totalMarks:"कुल अंक", sections:"सेक्शन", instr:"निर्देश", legendT:"पैलेट संकेत",
+  rules:[
+   "सही उत्तर पर <b>+2</b> अंक। गलत या अनुत्तरित प्रश्न पर <b>कोई नेगेटिव मार्किंग नहीं</b>।",
+   "विकल्प चुनने के बाद <b>Save &amp; Next</b> दबाएँ, तभी उत्तर सेव होगा।",
+   "<b>Mark for Review</b> से प्रश्न को बाद में देखने के लिए चिह्नित करें (उत्तर चुना हो तो वह भी गिना जाएगा)।",
+   "<b>Skip</b> से बिना सेव किए अगले प्रश्न पर जाएँ। <b>Clear</b> से चुना हुआ उत्तर हटाएँ।",
+   "प्रश्न पैलेट या सेक्शन टैब से किसी भी प्रश्न पर सीधे जा सकते हैं।",
+   "ऊपर दिए बटन से भाषा (हिन्दी / English) कभी भी बदल सकते हैं।",
+   "समय खत्म होते ही टेस्ट अपने आप सबमिट हो जाएगा।"],
+  lgNot:"अनदेखा", lgNotAns:"उत्तर नहीं दिया", lgAns:"उत्तर सेव", lgMark:"रिव्यू के लिए",
+  start:"टेस्ट शुरू करें ▶", qn:"प्रश्न", of:"/", review:"🚩 Review", marked:"🚩 Marked",
+  hint:"उत्तर रिकॉर्ड करने के लिए <b>Save &amp; Next</b> दबाएँ।",
+  prev:"◀ Previous", skip:"Skip ⏭", clear:"Clear ✕", mark:"Mark for Review &amp; Next", save:"Save &amp; Next ▶",
+  palTitle:"प्रश्न पैलेट", lgNoAns2:"बिना उत्तर", lgSaved:"सेव", lgRev:"रिव्यू",
+  submit:"टेस्ट सबमिट करें", savedCnt:"उत्तर सेव",
+  tPick:"पहले कोई विकल्प चुनें (या Skip करें)", tLast:"यह अंतिम प्रश्न है — पैलेट से समीक्षा करें या सबमिट करें", tFirst:"यह पहला प्रश्न है", tTime:"समय समाप्त! टेस्ट सबमिट हो रहा है…",
+  mTitle:"टेस्ट सबमिट करें?", mAns:"उत्तर दिए", mUn:"बिना उत्तर", mRev:"रिव्यू के लिए", mNv:"अनदेखे प्रश्न", mBack:"वापस जाएँ", mYes:"हाँ, सबमिट करें",
+  yourScore:"आपका स्कोर", m80:"शानदार प्रदर्शन! 🎯", m50:"अच्छा प्रयास — थोड़ा और अभ्यास करें 💪", m0:"रिवीजन की ज़रूरत है — नोट्स दोबारा पढ़ें 📘",
+  accuracy:"सटीकता (Accuracy)", attempted:"प्रयास किए", timeTaken:"लगा समय", correct:"सही", wrong:"गलत", skipped:"छोड़े गए",
+  secAnalysis:"सेक्शन-वार विश्लेषण", thSec:"सेक्शन", thC:"सही", thW:"गलत", thS:"छोड़े", thM:"अंक", accNote:"Accuracy = सही उत्तर ÷ प्रयास किए गए प्रश्न × 100। अंकन: सही +2, गलत 0 (नेगेटिव मार्किंग नहीं)।",
+  viewSol:"उत्तर देखें", retry:"दोबारा दें ↻", solTitle:"उत्तर समीक्षा", fAll:"सभी", fC:"सही", fW:"गलत", fS:"छोड़े", none:"इस श्रेणी में कोई प्रश्न नहीं।",
+  tagC:"सही +2", tagW:"गलत 0", tagS:"छोड़ा गया", expl:"व्याख्या:", backRes:"← परिणाम"
+ },
+ en:{
+  chapter:"Percentage", h1:"Percentage", tag:"Quantitative Aptitude",
+  questions:"Questions", minutes:"Minutes", totalMarks:"Total Marks", sections:"Sections", instr:"Instructions", legendT:"Palette Legend",
+  rules:[
+   "<b>+2</b> marks for a correct answer. <b>No negative marking</b> for wrong or unanswered questions.",
+   "After choosing an option, press <b>Save &amp; Next</b> — only then is the answer recorded.",
+   "Use <b>Mark for Review</b> to flag a question for later (a selected answer is still counted).",
+   "<b>Skip</b> moves to the next question without saving. <b>Clear</b> removes the selected answer.",
+   "Jump to any question using the question palette or the section tabs.",
+   "You can switch the language (हिन्दी / English) anytime using the button at the top.",
+   "The test is submitted automatically when the time runs out."],
+  lgNot:"Not visited", lgNotAns:"Not answered", lgAns:"Answered", lgMark:"Marked for review",
+  start:"Start Test ▶", qn:"Question", of:"of", review:"🚩 Review", marked:"🚩 Marked",
+  hint:"Press <b>Save &amp; Next</b> to record your answer.",
+  prev:"◀ Previous", skip:"Skip ⏭", clear:"Clear ✕", mark:"Mark for Review &amp; Next", save:"Save &amp; Next ▶",
+  palTitle:"Question Palette", lgNoAns2:"Not answered", lgSaved:"Saved", lgRev:"Review",
+  submit:"Submit Test", savedCnt:"answers saved",
+  tPick:"Select an option first (or Skip)", tLast:"This is the last question — review from the palette or submit", tFirst:"This is the first question", tTime:"Time is up! Submitting the test…",
+  mTitle:"Submit the test?", mAns:"Answered", mUn:"Unanswered", mRev:"Marked for review", mNv:"Not visited", mBack:"Go back", mYes:"Yes, submit",
+  yourScore:"Your Score", m80:"Excellent performance! 🎯", m50:"Good effort — keep practising 💪", m0:"Needs revision — re-read the notes 📘",
+  accuracy:"Accuracy", attempted:"Attempted", timeTaken:"Time taken", correct:"Correct", wrong:"Wrong", skipped:"Skipped",
+  secAnalysis:"Section-wise Analysis", thSec:"Section", thC:"Correct", thW:"Wrong", thS:"Skipped", thM:"Marks", accNote:"Accuracy = correct answers ÷ questions attempted × 100. Marking: correct +2, wrong 0 (no negative marking).",
+  viewSol:"Review Answers", retry:"Retake ↻", solTitle:"Answer Review", fAll:"All", fC:"Correct", fW:"Wrong", fS:"Skipped", none:"No questions in this category.",
+  tagC:"Correct +2", tagW:"Wrong 0", tagS:"Skipped", expl:"Explanation:", backRes:"← Result"
+ }
+};
+
+var SECTIONS=[{name:{hi:"Quantitative Aptitude",en:"Quantitative Aptitude"},sub:{hi:"प्रतिशत",en:"Percentage"},start:0,end:25}];
+var TOTAL_TIME=26*60, POS=2, NEG=0;
+
+var Q=[{"q": {"hi": "दो संख्याओं का योग 680 है। यदि बड़ी संख्या में 15% की कमी की जाती है और छोटी संख्या में 15% की वृद्धि की जाती है, तो परिणामी संख्याएँ बराबर होती हैं। छोटी संख्या ज्ञात कीजिए।", "en": "The sum of two numbers is 680. If the bigger number is decreased by 15% and the smaller number is increased by 15%, then the resultant numbers are equal. Find the smaller number."}, "o": {"hi": ["307", "285", "291", "289"], "en": ["307", "285", "291", "289"]}, "a": 3, "t": "SSC CGL Pre 2022 (13-12-2022, Shift-2)"}, {"q": {"hi": "एक संख्या को, दूसरी संख्या प्राप्त करने के लिए 20% कम किया जाता है। तीसरी संख्या प्राप्त करने के लिए, प्राप्त संख्या में 200% की वृद्धि की जाती है। तीसरी संख्या और मूल संख्या का अंतर, दूसरी और तीसरी संख्या के अंतर से कितने प्रतिशत अधिक या कम है?", "en": "A number is decreased by 20% to get another number. The number so obtained is increased by 200% to get a third number. The difference of the third number and the original number is what percentage more or less than the difference of second and third number?"}, "o": {"hi": ["अधिक, 15.7 प्रतिशत", "कम, 15.7 प्रतिशत", "अधिक, 12.5 प्रतिशत", "कम, 12.5 प्रतिशत"], "en": ["More, 15.7 Percent", "Less, 15.7 Percent", "More, 12.5 Percent", "Less, 12.5 Percent"]}, "a": 3, "t": "SSC CGL Pre 2022 (12-12-2022, Shift-2)"}, {"q": {"hi": "एक संख्या A का 11/5, संख्या B के 22% के बराबर है। संख्या B, तीसरी संख्या C के 2.5% के बराबर है। यदि C का मान 5500 है, तो A के 80% और B के 40% का योग कितना होगा?", "en": "(11/5) of a number A is 22% of a number B. The number B is equal to 2.5% of a third number C. If the value of C is 5500, then the sum of 80% of A and 40% of B is:"}, "o": {"hi": ["88", "75", "48", "66"], "en": ["88", "75", "48", "66"]}, "a": 3, "t": "SSC CGL 2021 (12-4-2022, Shift-2)"}, {"q": {"hi": "धनात्मक संख्या 'k' को जब उसके 30% से गुणा किया जाता है, तो प्राप्त संख्या, संख्या 'k' से 170% अधिक होती है, संख्या 'k' का मान ज्ञात कीजिए।", "en": "If a positive number 'k' when multiplied by 30% of itself gives a number which is 170% more than the number 'k', then the number 'k' is equal to:"}, "o": {"hi": ["6", "5", "9", "7"], "en": ["6", "5", "9", "7"]}, "a": 2, "t": "SSC CGL 2021 (18-4-2022, Shift-2)"}, {"q": {"hi": "A ने B से 30% अधिक निवेश किया। B ने C से 40% कम निवेश किया, जिसने Rs. 8,000 का निवेश किया। उन सभी के द्वारा निवेश की गई कुल राशि का औसत (निकटतम रु. तक) कितना है?", "en": "A invested 30% more than B. B invested 40% less than C, who invested Rs. 8,000. The average of the total amount invested by all of them together (to the nearest Rs.) is:"}, "o": {"hi": ["6,347", "6,417", "6,215", "6,143"], "en": ["6,347", "6,417", "6,215", "6,143"]}, "a": 0, "t": "SSC CGL 2021 (19-4-2022, Shift-1)"}, {"q": {"hi": "संख्याएँ A और B संख्या C से क्रमशः 0% और 50% अधिक हैं। A का B से अनुपात क्या है?", "en": "Numbers A and B are 0% and 50%, respectively, more than the number C. The ratio of A to that of B is:"}, "o": {"hi": ["2 : 3", "13 : 15", "15 : 13", "5 : 4"], "en": ["2 : 3", "13 : 15", "15 : 13", "5 : 4"]}, "a": 0, "t": "SSC CGL 2021 (20-4-2022, Shift-1)"}, {"q": {"hi": "यदि किसी संख्या में पहले 15% की वृद्धि होती है, फिर 15% की कमी होती है, तो इसका परिणाम 782 होगा। यदि उसी संख्या में पहले 25% की कमी हो, फिर 25% की वृद्धि हो और फिर से 20% की कमी हो, तो परिणामी संख्या ज्ञात करें।", "en": "If a number is first increased by 15%, then reduced by 15%, it results in 782. If the same number is first reduced by 25%, then increased by 25% and again reduced by 20%, then what will be the resulting number?"}, "o": {"hi": ["712", "150", "750", "600"], "en": ["712", "150", "750", "600"]}, "a": 3, "t": "SSC CGL Tier-1 (16-08-2021, Shift-3)"}, {"q": {"hi": "एक संख्या में पहले 12% की वृद्धि की जाती है और फिर 23% की वृद्धि की जाती है। इस प्रकार प्राप्त संख्या में अब 34% की कमी की जाती है। मूल संख्या (पूर्णांक के निकटतम) में शुद्ध वृद्धि या कमी प्रतिशत क्या है?", "en": "A number is first increased by 12% and then increased by 23%. The number, so obtained, is now decreased by 34%. What is the net increase or decrease percent in the original number (nearest to an integer)?"}, "o": {"hi": ["10% वृद्धि", "9% कमी", "10% कमी", "9% वृद्धि"], "en": ["10% increase", "9% decrease", "10% decrease", "9% increase"]}, "a": 1, "t": "SSC CGL Pre 2024 (9-9-2024, Shift-3)"}, {"q": {"hi": "रवि के वेतन में 50% की वृद्धि की गई। कुछ समय बाद उनकी नई सैलरी में भी 50% की बढ़ोतरी कर दी गई। उसके वेतन का लाभ प्रतिशत ज्ञात कीजिये।", "en": "Ravi's salary was increased by 50%. After some time, his new salary was also increased by 50%. Find his gain percentage of salary."}, "o": {"hi": ["125%", "100%", "200%", "150%"], "en": ["125%", "100%", "200%", "150%"]}, "a": 0, "t": "SSC CGL Pre 2024 (10-9-2024, Shift-2)"}, {"q": {"hi": "यदि किसी संख्या के 40% और उसी संख्या के 30% का योग 70 है, तो वह संख्या कौन-सी है?", "en": "If the sum of 40% of a number and 30% of the same number is 70, then the number is:"}, "o": {"hi": ["125", "100", "150", "200"], "en": ["125", "100", "150", "200"]}, "a": 1, "t": "SSC CGL Mains 2020 (29 Jan. 2022)"}, {"q": {"hi": "यदि किसी संख्या के 62% और 80% के बीच का अन्तर 198 है, तो उस संख्या के 92% और 56% के बीच का अन्तर ज्ञात कीजिये?", "en": "If the difference between 62% and 80% of a number is 198, then the difference between 92% and 56% of the number will be:"}, "o": {"hi": ["1100", "3564", "396", "360"], "en": ["1100", "3564", "396", "360"]}, "a": 2, "t": "SSC CGL 2019 (3 March 2020, Shift-3)"}, {"q": {"hi": "यदि किसी संख्या का 60%, उसी संख्या के 20% से 120 अधिक है, तो संख्या का 28%, उसी संख्या के 33 1/3% से कितना कम होगा?", "en": "If 60% of a number is 120 more than 20% of the number, then 28% of the number is less than 33 1/3% of the number by:"}, "o": {"hi": ["16", "15", "12", "14"], "en": ["16", "15", "12", "14"]}, "a": 0, "t": "SSC CGL Mains 2018 (12 Sep. 2019)"}, {"q": {"hi": "यदि किसी संख्या के 50% को 75 में जोड़ा जाता है, तो परिणाम वही संख्या होती है। वह संख्या है:", "en": "If 50% of the number is added to 75, then the result becomes the same number. The number is:"}, "o": {"hi": ["400", "100", "250", "150"], "en": ["400", "100", "250", "150"]}, "a": 3, "t": "SSC CGL 2018 (19 June 2019, Shift-1)"}, {"q": {"hi": "पहले महीने में मोहन की आय में 30% की वृद्धि होती है। दूसरे महीने में उसकी आय 30% घट जाती है। दो महीने बाद आय में कितने प्रतिशत वृद्धि या कमी होगी?", "en": "In the first month, the income of Mohan increases by 30%. In the second month his income decreases by 30%. What will be the percentage increase or decrease in the income after two months?"}, "o": {"hi": ["15% वृद्धि", "9% वृद्धि", "15% कमी", "9% कमी"], "en": ["15% increase", "9% increase", "15% decrease", "9% decrease"]}, "a": 3, "t": "SSC CGL Pre 2023 (25-07-2023, Shift-3)"}, {"q": {"hi": "एक वस्तु के मूल्य में r% की वृद्धि की जाती है। बाद में इस नए मूल्य में r% की कमी कर दी जाती है। अब नवीनतम मूल्य 1 रु. है। उस वस्तु का प्रारंभिक मूल्य कितना था?", "en": "The price of an article is increased by r%. The new price was decreased by r% later. Now the latest price is Rs. 1. What was the original price of the article?"}, "o": {"hi": ["10000 / (10000 − r²)", "(10000 − r²) / 10000", "100 / (100 − r²)", "100 / (1 − r²)"], "en": ["10000 / (10000 − r²)", "(10000 − r²) / 10000", "100 / (100 − r²)", "100 / (1 − r²)"]}, "a": 0, "t": "SSC CGL Pre 2023 (20-07-2023, Shift-3)"}, {"q": {"hi": "पहले वर्ष के दौरान, एक विद्यालय में विद्यार्थियों की संख्या में 12% की वृद्धि हुई, दूसरे वर्ष में 12% कमी हुई और तीसरे वर्ष में 10% की वृद्धि हुई। तीसरे वर्ष के अंत में विद्यार्थियों की संख्या लगभग 10842 थी। पहले वर्ष की शुरुआत में यह संख्या क्या थी?", "en": "During the first year, the strength of a school increased by 12%, in the second year it decreased by 12% and in the third year it increased by 10%. At the end of the third year its strength was nearly 10842. What was the strength at the beginning of the first year?"}, "o": {"hi": ["8000", "10000", "6500", "12000"], "en": ["8000", "10000", "6500", "12000"]}, "a": 1, "t": "SSC CGL Pre 2022 (9-12-2022, Shift-3)"}, {"q": {"hi": "एक मास्क निर्माण कंपनी ने 2018 में 'X' संख्या के मास्क का निर्माण किया। इसने 2019 में अपनी निर्माण क्षमता में 30% की वृद्धि की और उसके बाद 2020 में इसके निर्माण में 15% की और वृद्धि की। 2021 में, मशीनरी के खराब होने के कारण इसके निर्माण में 40% की गिरावट आई। यदि 2021 में 179400 मास्क का निर्माण किया जाता है तो 'X' का मान क्या होगा?", "en": "A mask manufacturing company manufactured 'X' number of masks in 2018. It increased its manufacturing capacity by 30% in 2019 and further increased its manufacturing by 15% in 2020. In 2021, due to the machinery breakdown, its manufacturing declined by 40%. What is the value of 'X' if it manufactured 179400 masks in 2021?"}, "o": {"hi": ["180000", "230000", "200000", "210000"], "en": ["180000", "230000", "200000", "210000"]}, "a": 2, "t": "SSC CGL Pre 2022 (7-12-2022, Shift-1)"}, {"q": {"hi": "वर्ष 2020 से 2021 तक देश A की जनसंख्या में p% की कमी हुई और देश B की जनसंख्या में q% की कमी आई। यहाँ 'p', 'q' से बड़ा है। माना 'x' दिए गए वर्ष में देश A की जनसंख्या का देश B की जनसंख्या से अनुपात है। 2020 से 2021 तक 'x' में कितने प्रतिशत की कमी है?", "en": "The population of country A decreased by p% and the population of country B decreased by q% from the year 2020 to 2021. Here 'p' is greater than 'q'. Let 'x' be the ratio of the population of country A to the population of country B in the given year. What is the percentage decrease in 'x' from 2020 to 2021?"}, "o": {"hi": ["100(p − q) / (100 − q)", "100(p − q) / (100 + p)", "100(p − q) / (100 − p)", "100(p − q) / (100 + q)"], "en": ["100(p − q) / (100 − q)", "100(p − q) / (100 + p)", "100(p − q) / (100 − p)", "100(p − q) / (100 + q)"]}, "a": 0, "t": "SSC CGL Pre 2022 (6-12-2022, Shift-2)"}, {"q": {"hi": "पहले वर्ष के दौरान, एक कस्बे की जनसंख्या में 12% की वृद्धि हुई। अगले वर्ष, किसी संक्रामक रोग के कारण, इसमें 8% की कमी आई। दूसरे वर्ष के अंत में, जनसंख्या 64,400 थी। पहले वर्ष की शुरूआत में कस्बे की जनसंख्या कितनी थी?", "en": "During the first year, the population of a town increased by 12%. The next year, due to some contagious disease, it decreased by 8%. At the end of the second year, the population was 64,400. Find the population of the town at the beginning of the first year."}, "o": {"hi": ["50,000", "54,750", "62,500", "50,500"], "en": ["50,000", "54,750", "62,500", "50,500"]}, "a": 2, "t": "SSC CGL Pre 2022 (5-12-2022, Shift-4)"}, {"q": {"hi": "एक जिले में 10,24,000 निवासी हैं। यदि जनसंख्या 2.5% प्रति वर्ष की दर से बढ़ती है, तो तीन वर्ष के अंत में निवासियों की संख्या ज्ञात कीजिए।", "en": "A district has 10,24,000 inhabitants. If the population increases at the rate 2.5% per annum, find the number of inhabitants at the end of three years."}, "o": {"hi": ["11,20,736", "11,02,736", "10,75,840", "10,64,850"], "en": ["11,20,736", "11,02,736", "10,75,840", "10,64,850"]}, "a": 1, "t": "SSC CGL Pre 2022 (2-12-2022, Shift-2)"}, {"q": {"hi": "एक आदमी का वेतन पहले 50% से बढ़ जाता है फिर 50% से घट जाता है। वेतन में प्रतिशत कमी या वृद्धि बताये।", "en": "A person's salary was increased by 50% and subsequently decreased by 50%. How much percentage does he lose or gain?"}, "o": {"hi": ["20% लाभ", "25% लाभ", "50% लाभ", "30% लाभ"], "en": ["20% gain", "25% gain", "50% gain", "30% gain"]}, "a": 1, "t": "SSC CGL 2021 (21-4-2022, Shift-2)"}, {"q": {"hi": "तीन वर्ष पहले रमन का वेतन रू.45000 था। उसके वेतन में पहले, दूसरे तथा तीसरे वर्ष में क्रमशः 10 प्रतिशत, A प्रतिशत तथा 20 प्रतिशत की वृद्धि की गई है। रमन की वर्तमान आय रू. 83160 है। A का मान क्या है?", "en": "Three years ago, Raman's salary was Rs. 45000. His salary is increased by 10 percent, A percent and 20 percent in first, second and third year respectively. Raman's present salary is Rs. 83160. What is the value of A?"}, "o": {"hi": ["40", "30", "50", "54"], "en": ["40", "30", "50", "54"]}, "a": 0, "t": "SSC CGL Mains 2021 (8 Aug. 2022)"}, {"q": {"hi": "एक स्कूटर के मूल्य में क्रमिक तौर पर 10%, 5% और 15% की वृद्धि होती है। स्कूटर की कीमत में कुल कितने प्रतिशत की वृद्धि हुई है।", "en": "The price of a scooter increases successively by 10%, 5% and 15%. What is the total percentage increase in price of scooter?"}, "o": {"hi": ["32 33/40 %", "34 21/40 %", "30 11/40 %", "36 31/40 %"], "en": ["32 33/40 %", "34 21/40 %", "30 11/40 %", "36 31/40 %"]}, "a": 0, "t": "SSC CGL Pre 2022 (1-12-2022, Shift-2)"}, {"q": {"hi": "एक निवेशक ने शेयरों में रु. 2,00,000 का निवेश किया। पहले दिन शेयर 18% बढ़े, दूसरे दिन 15% गिरे और फिर तीसरे दिन 3% गिरे। निवेशक के शेयरों के मूल्य में शुद्ध प्रतिशत वृद्धि या कमी क्या है? (एक दशमलव स्थान तक पूर्णांकित)", "en": "An investor invested Rs. 2,00,000 in shares. The shares rose by 18% on the first day, fell by 15% on the second day, and then fell by 3% on the third day. What is the net percentage increase or decrease in the value of the investor's shares? (Rounded up to one decimal place)"}, "o": {"hi": ["2.2% की वृद्धि", "2.7% की वृद्धि", "2.7% की कमी", "2.2% की कमी"], "en": ["increase by 2.2%", "increase by 2.7%", "decrease by 2.7%", "decrease by 2.2%"]}, "a": 2, "t": "SSC CGL Pre 2024 (18-9-2024, Shift-3)"}, {"q": {"hi": "किसी वस्तु की कीमत लगातार दो बार बढ़ाई जाती है। अंतिम कीमत रु. 2,295 है और शुरुआती कीमत रु. 1,000 थी। दूसरी बार प्रतिशत वृद्धि पहली बार प्रतिशत वृद्धि से दोगुनी थी। दूसरी बार कीमत में कितने प्रतिशत की वृद्धि की गई?", "en": "The price of an item is increased twice successively. The final price is Rs. 2,295 and initial price was Rs. 1,000. The percentage increment the second time was twice the percentage increment the first time. By what percentage was the price increased the second time?"}, "o": {"hi": ["35%", "65%", "70%", "25%"], "en": ["35%", "65%", "70%", "25%"]}, "a": 2, "t": "SSC CGL Pre 2024 (19-9-2024, Shift-2)"}, {"q": {"hi": "एक कर्मचारी का वेतन पहले 25% बढ़ाया जाता है, फिर उसमें 12% की कमी की जाती है। उसके वेतन में प्रतिशत परिवर्तन है?", "en": "The salary of a worker is first increased by 25%, then it is decreased by 12%. The percentage change in his salary is:"}, "o": {"hi": ["10% वृद्धि", "13% वृद्धि", "10% कमी", "13% कमी"], "en": ["10% increase", "13% increase", "10% decrease", "13% decrease"]}, "a": 0, "t": "SSC CGL Pre 2024 (11-9-2024, Shift-2)"}]
+;
+var N=Q.length, LET=["A","B","C","D"];
+
+/* ---------- State ---------- */
+var lang=null,started=false,saved,draft,visited,marked,cur,endAt,tick,finished,timeTaken,rvFilter="all",curView="view-lang";
+function $(id){return document.getElementById(id);}
+function T(k){return UI[lang][k];}
+function secOf(i){for(var s=0;s<SECTIONS.length;s++){if(i>=SECTIONS[s].start&&i<=SECTIONS[s].end)return s;}return 0;}
+function show(id){curView=id;["view-lang","view-intro","view-test","view-result","view-review"].forEach(function(v){$(v).classList.toggle("hidden",v!==id);});window.scrollTo(0,0);}
+function toast(t){var d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove();},1800);}
+
+
+function buildWM(){var w=$("wmLayer"),W=Math.max(innerWidth,360)+300,H=Math.max(innerHeight,600)+200,h="";for(var y=0;y*90<H;y++){for(var x=0;x*140<W;x++){h+='<span style="top:'+(y*90)+'px;left:'+(x*140-20+(y%2)*60)+'px">Mock Test 2</span>';}}w.innerHTML=h;}
+function fitBars(){var r=document.documentElement.style,t=document.querySelector(".topbar"),s=document.getElementById("secTabs");if(t)r.setProperty("--tb",t.offsetHeight+"px");r.setProperty("--tabs",(s&&s.offsetParent?s.offsetHeight:0)+"px");}
+buildWM();fitBars();
+addEventListener("resize",function(){buildWM();fitBars();});
+addEventListener("load",fitBars);
+var _show=show;show=function(v){_show(v);fitBars();setTimeout(fitBars,60);};
+addEventListener("keydown",function(e){
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  var vt=$("view-test");if(!vt||vt.classList.contains("hidden")||!$("modal").classList.contains("hidden"))return;
+  var k=e.key,o=document.querySelectorAll("#qOpts .opt"),i=-1;
+  if(k&&k.length===1){i="abcd".indexOf(k.toLowerCase());if(k>="1"&&k<="4")i=+k-1;}
+  if(i>=0&&i<o.length){o[i].click();e.preventDefault();return;}
+  if(k==="Enter"){$("bSave").click();e.preventDefault();}
+  else if(k==="ArrowLeft"){$("bPrev").click();e.preventDefault();}
+  else if(k==="m"||k==="M"){$("bMark").click();e.preventDefault();}
+});
+
+
+/* ---------- Language ---------- */
+function toggleLang(){setLang(lang==="hi"?"en":"hi");}
+function refreshAll(){
+  $("topSub").textContent=T("chapter");
+  $("langBtn").textContent=lang==="hi"?"EN":"हिं";
+  if(curView==="view-intro")renderIntro();
+  else if(curView==="view-test")render();
+  else if(curView==="view-result")renderResult();
+  else if(curView==="view-review")openReview(rvFilter);
+}
+function setLang(l){lang=l;document.documentElement.lang=l;$("langBtn").classList.remove("hidden");$("topSub").textContent=T("chapter");$("langBtn").textContent=l==="hi"?"EN":"हिं";
+  if(curView==="view-lang"){renderIntro();show("view-intro");}else refreshAll();}
+function legendHTML(a,b,c,d){
+  return '<span><i style="background:#EEF1F5;border:1.5px solid var(--line)"></i>'+a+'</span>'+
+   '<span><i style="background:#FDECEA;border:1.5px solid var(--red)"></i>'+b+'</span>'+
+   '<span><i style="background:var(--green)"></i>'+c+'</span>'+
+   '<span><i style="background:var(--purple);border-radius:50%"></i>'+d+'</span>';
+}
+function renderIntro(){
+  var secs=SECTIONS.map(function(s){return '<div class="sl"><span>'+s.name[lang]+' — '+s.sub[lang]+'</span><b>'+(s.end-s.start+1)+' Q</b></div>';}).join("");
+  var rules=T("rules").map(function(r){return '<li>'+r+'</li>';}).join("");
+  $("view-intro").innerHTML=
+   '<div class="hero"><span class="badge">Mock Test 2</span><h1>'+T("h1")+'</h1><div class="tag">'+T("tag")+'</div></div>'+
+   '<div class="card"><div class="intro-stats" style="margin-top:0">'+
+    '<div class="intro-stat"><b>'+N+'</b><span>'+T("questions")+'</span></div>'+
+    '<div class="intro-stat"><b>'+(TOTAL_TIME/60)+'</b><span>'+T("minutes")+'</span></div>'+
+    '<div class="intro-stat"><b>'+(N*POS)+'</b><span>'+T("totalMarks")+'</span></div></div>'+
+    '<h3>'+T("sections")+'</h3><div class="sec-list">'+secs+'</div></div>'+
+   '<div class="card"><h3>'+T("instr")+'</h3><ul class="rules">'+rules+'</ul></div>'+
+   '<div class="card"><h3>'+T("legendT")+'</h3><div class="legend">'+legendHTML(T("lgNot"),T("lgNotAns"),T("lgAns"),T("lgMark"))+'</div></div>'+
+   '<button class="start-btn" onclick="startTest()">'+T("start")+'</button>';
+}
+
+/* ---------- Flow ---------- */
+function startTest(){
+  saved=Array(N).fill(null);draft=Array(N).fill(null);visited=Array(N).fill(false);marked=Array(N).fill(false);
+  cur=0;finished=false;endAt=Date.now()+TOTAL_TIME*1000;
+  $("timer").classList.remove("hidden");show("view-test");
+  go(0);updateTimer();clearInterval(tick);tick=setInterval(updateTimer,1000);
+}
+function updateTimer(){
+  var left=Math.max(0,Math.round((endAt-Date.now())/1000));
+  var m=String(Math.floor(left/60)).padStart(2,"0"),s=String(left%60).padStart(2,"0");
+  var t=$("timer");t.textContent=m+":"+s;t.classList.toggle("low",left<=60);
+  if(left<=0&&!finished){toast(T("tTime"));closeModal();finish();}
+}
+function go(i){if(i<0||i>=N)return;cur=i;visited[i]=true;draft[i]=saved[i];render();}
+function render(){
+  var q=Q[cur],s=secOf(cur);
+  $("qProg").textContent=T("qn")+" "+(cur+1)+" "+T("of")+" "+N;
+  $("qText").innerHTML=(q.t?'<span class="pyq">PYQ · '+q.t+'</span>':'')+(cur+1)+". "+q.q[lang];
+  $("qOpts").innerHTML=q.o[lang].map(function(t,k){
+    return '<div class="opt'+(draft[cur]===k?' selected':'')+'" onclick="pick('+k+')"><span class="opt-letter">'+LET[k]+'</span><span>'+t+'</span></div>';
+  }).join("");
+  $("flagChip").classList.toggle("on",marked[cur]);
+  $("flagChip").textContent=marked[cur]?T("marked"):T("review");
+  $("qHint").innerHTML=T("hint");
+  $("qHint").classList.toggle("hidden",draft[cur]===saved[cur]);
+  $("bPrev").innerHTML=T("prev");$("bSkip").innerHTML=T("skip");$("bClear").innerHTML=T("clear");
+  $("bMark").innerHTML=T("mark");$("bSave").innerHTML=T("save");$("bSubmit").textContent=T("submit");
+  $("palTitle").textContent=T("palTitle");
+  $("palLegend").innerHTML=legendHTML(T("lgNot"),T("lgNoAns2"),T("lgSaved"),T("lgRev"));
+  $("secTabs").innerHTML=SECTIONS.map(function(sc,k){
+    var a=0;for(var i=sc.start;i<=sc.end;i++){if(saved[i]!==null)a++;}
+    return '<button class="sec-tab'+(k===s?' active':'')+'" onclick="go('+sc.start+')"><b>'+sc.name[lang]+' • '+sc.sub[lang]+'</b><span>'+a+' / '+(sc.end-sc.start+1)+' '+T("savedCnt")+'</span></button>';
+  }).join("");
+  renderPalette();
+}
+function status(i){
+  if(marked[i])return saved[i]!==null?"markans":"mark";
+  if(saved[i]!==null)return "ans";
+  if(visited[i])return "notans";
+  return "";
+}
+function renderPalette(){
+  $("palette").innerHTML=SECTIONS.map(function(sc){
+    var b="";for(var i=sc.start;i<=sc.end;i++){b+='<button class="pbtn '+status(i)+(i===cur?' cur':'')+'" onclick="go('+i+')">'+(i+1)+'</button>';}
+    return '<div class="psec">'+sc.name[lang]+' — '+sc.sub[lang]+'</div><div class="pgrid">'+b+'</div>';
+  }).join("");
+}
+
+/* ---------- Actions ---------- */
+function pick(k){draft[cur]=k;render();}
+function next(){if(cur<N-1)go(cur+1);else{render();toast(T("tLast"));}}
+function prevQ(){if(cur>0)go(cur-1);else toast(T("tFirst"));}
+function skipQ(){draft[cur]=saved[cur];next();}
+function clearAns(){saved[cur]=null;draft[cur]=null;render();}
+function saveNext(){
+  if(draft[cur]===null){toast(T("tPick"));return;}
+  saved[cur]=draft[cur];marked[cur]=false;next();
+}
+function markNext(){marked[cur]=true;if(draft[cur]!==null)saved[cur]=draft[cur];next();}
+function toggleMark(){marked[cur]=!marked[cur];render();}
+
+/* ---------- Submit ---------- */
+function counts(){
+  var a=0,m=0,nv=0;
+  for(var i=0;i<N;i++){if(saved[i]!==null)a++;if(marked[i])m++;if(!visited[i])nv++;}
+  return {a:a,m:m,nv:nv,un:N-a};
+}
+function openSubmit(){
+  var c=counts();
+  $("modalBox").innerHTML='<h3>'+T("mTitle")+'</h3><div class="sum-grid">'+
+   '<div class="sum-item"><b style="color:var(--green)">'+c.a+'</b><span>'+T("mAns")+'</span></div>'+
+   '<div class="sum-item"><b style="color:var(--red)">'+c.un+'</b><span>'+T("mUn")+'</span></div>'+
+   '<div class="sum-item"><b style="color:var(--purple)">'+c.m+'</b><span>'+T("mRev")+'</span></div>'+
+   '<div class="sum-item"><b>'+c.nv+'</b><span>'+T("mNv")+'</span></div></div>'+
+   '<div class="m-row"><button style="background:var(--bg);color:var(--navy)" onclick="closeModal()">'+T("mBack")+'</button>'+
+   '<button style="background:var(--red);color:#fff" onclick="closeModal();finish()">'+T("mYes")+'</button></div>';
+  $("modal").classList.remove("hidden");
+}
+function closeModal(){$("modal").classList.add("hidden");}
+function finish(){
+  if(finished)return;finished=true;clearInterval(tick);
+  timeTaken=Math.min(TOTAL_TIME,Math.round((Date.now()-(endAt-TOTAL_TIME*1000))/1000));
+  $("timer").classList.add("hidden");
+  show("view-result");renderResult();
+}
+function calc(lo,hi){
+  var c=0,w=0,u=0;
+  for(var i=lo;i<=hi;i++){if(saved[i]===null)u++;else if(saved[i]===Q[i].a)c++;else w++;}
+  return {c:c,w:w,u:u,score:c*POS-w*NEG,att:c+w};
+}
+function renderResult(){
+  var t=calc(0,N-1),max=N*POS;
+  var acc=t.att?(t.c/t.att*100):0, pct=t.score/max*100;
+  var msg=pct>=80?T("m80"):pct>=50?T("m50"):T("m0");
+  var rows=SECTIONS.map(function(sc){var r=calc(sc.start,sc.end),ac=r.att?Math.round(r.c/r.att*100):0;
+    return '<tr><td>'+sc.name[lang]+'<br><small style="color:var(--ink-soft)">'+sc.sub[lang]+'</small></td><td>'+r.c+'</td><td>'+r.w+'</td><td>'+r.u+'</td><td><b>'+r.score+'</b></td><td>'+ac+'%</td></tr>';}).join("");
+  $("view-result").innerHTML=
+   '<div class="score-hero"><div class="lbl">'+T("yourScore")+'</div><div class="big">'+t.score+' <small>/ '+max+'</small></div><div class="msg">'+msg+'</div></div>'+
+   '<div class="stat-grid">'+
+    '<div class="stat t"><b>'+acc.toFixed(1)+'%</b><span>'+T("accuracy")+'</span></div>'+
+    '<div class="stat n"><b>'+t.att+' / '+N+'</b><span>'+T("attempted")+'</span></div>'+
+    '<div class="stat a"><b>'+Math.floor(timeTaken/60)+':'+String(timeTaken%60).padStart(2,"0")+'</b><span>'+T("timeTaken")+'</span></div>'+
+    '<div class="stat g"><b>'+t.c+'</b><span>'+T("correct")+'</span></div>'+
+    '<div class="stat r"><b>'+t.w+'</b><span>'+T("wrong")+'</span></div>'+
+    '<div class="stat n"><b>'+t.u+'</b><span>'+T("skipped")+'</span></div>'+
+   '</div>'+
+   '<div class="card"><h3>'+T("secAnalysis")+'</h3><table class="mini-table"><tr><th>'+T("thSec")+'</th><th>'+T("thC")+'</th><th>'+T("thW")+'</th><th>'+T("thS")+'</th><th>'+T("thM")+'</th><th>Acc.</th></tr>'+rows+'</table>'+
+   '<p style="font-size:11.5px;color:var(--ink-soft);margin-top:10px">'+T("accNote")+'</p></div>'+
+   '<div class="res-btns"><button class="btn-navy" onclick="openReview(\'all\')">'+T("viewSol")+'</button><button class="btn-teal" onclick="startTest()">'+T("retry")+'</button></div>';
+}
+function openReview(f){
+  rvFilter=f;var list=[];
+  for(var i=0;i<N;i++){
+    var st=saved[i]===null?"s":(saved[i]===Q[i].a?"c":"w");
+    if(f==="all"||f===st)list.push(i);
+  }
+  var chips=[["all",T("fAll")],["c",T("fC")],["w",T("fW")],["s",T("fS")]].map(function(x){
+    return '<button class="fchip'+(f===x[0]?' on':'')+'" onclick="openReview(\''+x[0]+'\')">'+x[1]+'</button>';}).join("");
+  var cards=list.map(function(i){
+    var q=Q[i],st=saved[i]===null?"s":(saved[i]===q.a?"c":"w");
+    var opts=q.o[lang].map(function(t,k){
+      var cl="";if(k===q.a)cl=" correct";else if(k===saved[i])cl=" wrong";
+      return '<div class="opt static'+cl+'"><span class="opt-letter">'+LET[k]+'</span><span>'+t+'</span></div>';}).join("");
+    var tg=st==="c"?'<span class="tagx c">'+T("tagC")+'</span>':st==="w"?'<span class="tagx w">'+T("tagW")+'</span>':'<span class="tagx s">'+T("tagS")+'</span>';
+    return '<div class="rv-card"><div class="rv-top"><span>'+T("qn")+' '+(i+1)+' • '+SECTIONS[secOf(i)].name[lang]+'</span>'+tg+'</div>'+
+      '<div class="q-text">'+(q.t?'<span class="pyq">PYQ · '+q.t+'</span>':'')+q.q[lang]+'</div>'+opts+(q.e?'<div class="note-box"><b>'+T("expl")+'</b> '+q.e[lang]+'</div>':'')+'</div>';}).join("");
+  $("view-review").innerHTML='<h3 style="margin-bottom:10px">'+T("solTitle")+'</h3><div class="filters">'+chips+'</div>'+(cards||'<p style="color:var(--ink-soft)">'+T("none")+'</p>')+
+    '<div class="res-btns"><button class="btn-navy" onclick="show(\'view-result\');renderResult()">'+T("backRes")+'</button><button class="btn-teal" onclick="startTest()">'+T("retry")+'</button></div>';
+  show("view-review");
+}
+</script>
+</body>
+</html>
